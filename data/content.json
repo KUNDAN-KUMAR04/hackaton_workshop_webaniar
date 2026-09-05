@@ -4,7 +4,8 @@
     "tagline": "Everything for the event, in one place.",
     "description": "Slides, code, schedules, mentors and links — all pulled live from this file. Edit data/content.json and the page updates itself.",
     "date": "TBA",
-    "location": "TBA"
+    "location": "TBA",
+    "contact_email": "you@example.com"
   },
   "sections": [
     {

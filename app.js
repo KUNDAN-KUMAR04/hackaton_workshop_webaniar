@@ -109,7 +109,7 @@ function renderSpeakers(items) {
 
 function renderResources(items) {
   return `<div class="grid">${items.map(it => `
-    ${it.url ? `<a class="card-link" href="${escapeAttr(it.url)}">` : ''}
+    ${it.url ? `<a class="card-link" href="${escapeAttr(linkFor(it.url, it.title))}">` : ''}
     <div class="card">
       <h3>${escapeHtml(it.title || '')}</h3>
       ${it.description ? `<p>${escapeHtml(it.description)}</p>` : ''}
@@ -120,7 +120,7 @@ function renderResources(items) {
 
 function renderLinks(items) {
   return `<ul class="link-list">${items.map(it => `
-    <li><a href="${escapeAttr(it.url || '#')}">
+    <li><a href="${escapeAttr(linkFor(it.url || '#', it.label))}">
       <span>${escapeHtml(it.label || it.url || '')}</span>
       <span class="go">open</span>
     </a></li>`).join('')}</ul>`;
@@ -133,8 +133,22 @@ function renderGeneric(items) {
     const entries = Object.entries(it).filter(([k]) => k !== 'url');
     const body = entries.map(([k, v]) => `<p><strong>${escapeHtml(k)}:</strong> ${escapeHtml(String(v))}</p>`).join('');
     const inner = `<div class="card">${body}</div>`;
-    return it.url ? `<a class="card-link" href="${escapeAttr(it.url)}">${inner}</a>` : inner;
+    return it.url ? `<a class="card-link" href="${escapeAttr(linkFor(it.url, it.title))}">${inner}</a>` : inner;
   }).join('')}</div>`;
+}
+
+// Routes any link that leaves this site (or points somewhere that could
+// expire — http/https URLs) through go.html first, so a dead destination
+// shows our own "link broken" page instead of a raw host/GitHub 404.
+// Relative paths into slides/, code/, resources/ (files we control) go
+// straight through untouched.
+function linkFor(url, label = '') {
+  if (!url) return '#';
+  const isExternal = /^https?:\/\//i.test(url);
+  if (!isExternal) return url;
+  const params = new URLSearchParams({ to: url });
+  if (label) params.set('label', label);
+  return `go.html?${params.toString()}`;
 }
 
 function escapeHtml(str) {

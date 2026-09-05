@@ -74,6 +74,27 @@ Example of a custom section:
 }
 ```
 
+## When a link goes bad
+
+You now have two layers of protection:
+
+1. **`404.html`** — GitHub Pages automatically serves this for any URL on your site that doesn't resolve (a mistyped link, a page that moved, an old bookmark). This is native GitHub Pages behavior — no configuration needed. It's already set up with the correct paths for this repo (`.../hackaton_workshop_webaniar/`). It shows a friendly "page not found" message with a button back to the hub and a "report this link" email.
+
+2. **`go.html`** — handles the other direction: links from your hub *out* to external sites (registration forms, Google Docs, etc.) that might expire.
+
+Together: your own broken links → `404.html`. Links you point *at* that later go dead → `go.html`.
+
+Every external (`http`/`https`) link on the hub is automatically routed through `go.html` first — a small page on *your* site that says "you're leaving the hub, here's where you're headed," with a **Continue** button and a **"let the organizers know"** contact link (built from `event.contact_email` in `content.json`). If the destination is dead, the visitor finds out on your branded page and can email you, instead of hitting an unbranded error somewhere else.
+
+This is a courtesy step, not a live checker — browsers can't verify a cross-origin link is alive without hitting it, so `go.html` doesn't try to guess; it just gives people a safe, clear off-ramp either way.
+
+Files you host yourself (anything under `slides/`, `code/`, `resources/`) skip this step and link straight through, since you control whether those exist.
+
+Set your contact address once, at the top of `content.json`:
+```json
+"event": { "contact_email": "you@example.com" }
+```
+
 ## Publishing it as a live site (GitHub Pages)
 
 1. Go to the repo's **Settings → Pages**.

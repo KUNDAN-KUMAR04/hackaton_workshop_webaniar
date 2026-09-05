@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .nf-card{
+    max-width: 480px;
+    margin: 14vh auto 0;
+    text-align: left;
+  }
+  .nf-card .code{
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-2);
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+  .nf-card h1{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.7rem;
+    margin: 0 0 12px;
+  }
+  .nf-card p{ color: var(--text-dim); }
+  .nf-actions{ display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+  .btn{
+    display: inline-block;
+    text-decoration: none;
+    font-size: 0.92rem;
+    padding: 10px 18px;
+    border-radius: var(--radius-s);
+    border: 1px solid var(--border-strong);
+  }
+  .btn-primary{ background: var(--accent); color: #14181A; border-color: var(--accent); font-weight: 600; }
+  .btn-secondary{ color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<!--
+  Paths below are already set for this repo's GitHub Pages project URL:
+  https://<username>.github.io/hackaton_workshop_webaniar/
+  If you ever rename the repo or move to a custom domain, update the
+  "/hackaton_workshop_webaniar/" paths below to match.
+-->
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="/hackaton_workshop_webaniar/" class="brand" style="text-decoration:none;"><span class="dot"></span> Event Hub</a>
+  </div>
+</header>
+
+<div class="wrap nf-card">
+  <div class="code">404</div>
+  <h1>This page doesn't exist here</h1>
+  <p>
+    The link that brought you here may be out of date, mistyped, or
+    pointing at something that's since moved. The hub itself is still
+    up — start from the home page below.
+  </p>
+  <div class="nf-actions">
+    <a class="btn btn-primary" href="/hackaton_workshop_webaniar/">Back to the hub</a>
+    <a class="btn btn-secondary" id="contact-link" href="#">Report this link</a>
+  </div>
+</div>
+
+<script>
+  fetch('/hackaton_workshop_webaniar/data/content.json').then(r => r.json()).then(data => {
+    const email = data?.event?.contact_email;
+    const contactLink = document.getElementById('contact-link');
+    if (email) {
+      const subject = encodeURIComponent('Broken link on the event hub');
+      const body = encodeURIComponent(`This URL gave a 404:\n${window.location.href}`);
+      contactLink.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    } else {
+      contactLink.style.display = 'none';
+    }
+  }).catch(() => {
+    document.getElementById('contact-link').style.display = 'none';
+  });
+</script>
+</body>
+</html>

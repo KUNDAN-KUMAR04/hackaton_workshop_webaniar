@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leaving the hub…</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .go-card{
+    max-width: 480px;
+    margin: 12vh auto 0;
+    text-align: left;
+  }
+  .go-card h1{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.6rem;
+    margin: 0 0 12px;
+  }
+  .go-url{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent-2);
+    word-break: break-all;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-s);
+    padding: 10px 12px;
+    margin: 16px 0 24px;
+  }
+  .go-actions{ display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+  .btn{
+    display: inline-block;
+    text-decoration: none;
+    font-size: 0.92rem;
+    padding: 10px 18px;
+    border-radius: var(--radius-s);
+    border: 1px solid var(--border-strong);
+  }
+  .btn-primary{ background: var(--accent); color: #14181A; border-color: var(--accent); font-weight: 600; }
+  .btn-secondary{ color: var(--text-dim); }
+  #status-note{ font-size: 0.88rem; color: var(--text-dim); }
+  #status-note.warn{ color: var(--coral); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand" style="text-decoration:none;"><span class="dot"></span> Event Hub</a>
+  </div>
+</header>
+
+<div class="wrap go-card">
+  <h1>You're leaving the hub</h1>
+  <p id="go-label">This link points to an external destination:</p>
+  <div class="go-url" id="go-url">—</div>
+
+  <div class="go-actions">
+    <a class="btn btn-primary" id="continue-btn" href="#">Continue</a>
+    <a class="btn btn-secondary" href="index.html">Back to hub</a>
+  </div>
+
+  <p id="status-note">
+    If this link is broken or leads somewhere unexpected,
+    <a id="contact-link" href="#">let the organizers know</a> instead of guessing.
+  </p>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const target = params.get('to') || '';
+  const label = params.get('label') || '';
+
+  document.getElementById('go-url').textContent = target || 'No destination was provided.';
+  document.getElementById('continue-btn').href = target || 'index.html';
+  if (label) {
+    document.getElementById('go-label').textContent = `“${label}” points to:`;
+  }
+  if (!target) {
+    document.getElementById('continue-btn').style.display = 'none';
+    const note = document.getElementById('status-note');
+    note.classList.add('warn');
+    note.innerHTML = 'No link was given to go to — this page was opened directly.';
+  }
+
+  // Wire up the contact link from content.json so it's never hardcoded.
+  fetch('data/content.json').then(r => r.json()).then(data => {
+    const email = data?.event?.contact_email;
+    const contactLink = document.getElementById('contact-link');
+    if (email) {
+      const subject = encodeURIComponent('Broken link on the event hub');
+      const body = encodeURIComponent(`This link looked broken or wrong:\n${target}`);
+      contactLink.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    } else {
+      contactLink.style.display = 'none';
+    }
+  }).catch(() => {
+    document.getElementById('contact-link').style.display = 'none';
+  });
+</script>
+</body>
+</html>
