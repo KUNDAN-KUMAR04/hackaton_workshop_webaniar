@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Hub</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span> Event Hub</div>
+    <nav class="site-nav">
+      <a href="#schedule">Schedule</a>
+      <a href="#speakers">Speakers</a>
+      <a href="#resources">Resources</a>
+      <a href="#links">Links</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1 id="event-title">Event Hub</h1>
+    <p class="tagline" id="event-tagline"></p>
+    <p class="tagline" id="event-description" style="font-size:0.98rem;"></p>
+    <div class="meta">
+      <span><em>Date</em> <span id="event-date">TBA</span></span>
+      <span><em>Location</em> <span id="event-location">TBA</span></span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap" id="sections">
+  <!-- Sections are rendered here from data/content.json -->
+</main>
+
+<footer class="wrap">
+  Content on this page is loaded from <code>data/content.json</code> —
+  edit that file to update everything above.
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

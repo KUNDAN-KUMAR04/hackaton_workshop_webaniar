@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root{
+  --bg: #0E1517;
+  --bg-raised: #141E21;
+  --border: rgba(237, 239, 238, 0.09);
+  --border-strong: rgba(237, 239, 238, 0.18);
+  --text: #EDEFEE;
+  --text-dim: #96A5A3;
+  --accent: #F2B705;
+  --accent-2: #4FD1C5;
+  --coral: #EF7C5F;
+  --radius-s: 4px;
+  --radius-m: 10px;
+  --max-w: 880px;
+}
+
+*{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px);
+  background-size: 100% 96px;
+  opacity: 0.35;
+  z-index: 0;
+}
+
+a{ color: inherit; }
+
+::selection{ background: var(--accent); color: #12181A; }
+
+.wrap{
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Focus visibility */
+a:focus-visible, button:focus-visible, input:focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Header ---------- */
+header.site-header{
+  position: relative;
+  z-index: 2;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.site-header .wrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.brand{
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.brand .dot{
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+nav.site-nav{ display: flex; gap: 22px; font-size: 0.9rem; }
+nav.site-nav a{ text-decoration: none; color: var(--text-dim); transition: color .15s ease; }
+nav.site-nav a:hover{ color: var(--text); }
+
+/* ---------- Hero ---------- */
+.hero{
+  padding: 88px 0 72px;
+  border-bottom: 1px solid var(--border);
+}
+.hero h1{
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+  max-width: 14ch;
+}
+.hero .tagline{
+  font-size: 1.15rem;
+  color: var(--text-dim);
+  max-width: 46ch;
+  margin: 0 0 28px;
+}
+.hero .meta{
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--accent-2);
+}
+.hero .meta span{ display: flex; align-items: baseline; gap: 6px; }
+.hero .meta em{
+  font-style: normal;
+  color: var(--text-dim);
+}
+
+/* ---------- Section shell ---------- */
+.section{
+  padding: 64px 0;
+  border-bottom: 1px solid var(--border);
+}
+.section:last-of-type{ border-bottom: none; }
+.section-head{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  gap: 16px;
+}
+.section-head h2{
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.section-index{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+/* ---------- Schedule (timeline: legitimate sequence) ---------- */
+.timeline{ position: relative; padding-left: 28px; }
+.timeline::before{
+  content: "";
+  position: absolute;
+  left: 5px; top: 6px; bottom: 6px;
+  width: 1px;
+  background: var(--border-strong);
+}
+.timeline-item{ position: relative; padding-bottom: 28px; }
+.timeline-item:last-child{ padding-bottom: 0; }
+.timeline-item::before{
+  content: "";
+  position: absolute;
+  left: -28px; top: 5px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.timeline-item .time{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--accent-2);
+  display: block;
+  margin-bottom: 4px;
+}
+.timeline-item h3{ margin: 0 0 4px; font-size: 1.02rem; font-weight: 600; }
+.timeline-item p{ margin: 0; color: var(--text-dim); font-size: 0.94rem; }
+
+/* ---------- Card grid (speakers / resources / custom) ---------- */
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+}
+.card{
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  padding: 20px;
+  transition: border-color .15s ease;
+}
+.card:hover{ border-color: var(--border-strong); }
+.card h3{ margin: 0 0 6px; font-size: 1.02rem; font-weight: 600; }
+.card .role{ font-size: 0.85rem; color: var(--accent-2); margin: 0 0 10px; }
+.card p{ margin: 0; color: var(--text-dim); font-size: 0.92rem; }
+.card .tag{
+  display: inline-block;
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--coral);
+  border: 1px solid rgba(239, 124, 95, 0.35);
+  border-radius: var(--radius-s);
+  padding: 2px 7px;
+}
+.card a.card-link{
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ---------- Links list ---------- */
+.link-list{ list-style: none; margin: 0; padding: 0; }
+.link-list li{ border-top: 1px solid var(--border); }
+.link-list li:last-child{ border-bottom: 1px solid var(--border); }
+.link-list a{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 4px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+.link-list a:hover{ color: var(--accent); }
+.link-list .go{
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+}
+
+/* ---------- Empty / add-content state ---------- */
+.empty-hint{
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-m);
+  padding: 18px;
+}
+.empty-hint code{
+  background: rgba(237,239,238,0.06);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+}
+
+/* ---------- Footer ---------- */
+footer{
+  padding: 32px 0 64px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 560px){
+  .hero{ padding: 56px 0 48px; }
+  .section{ padding: 44px 0; }
+  .site-nav{ display: none; }
+}

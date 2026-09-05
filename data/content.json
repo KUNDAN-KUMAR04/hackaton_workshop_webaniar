@@ -1,0 +1,47 @@
+{
+  "event": {
+    "title": "Hackathon & Workshop Hub",
+    "tagline": "Everything for the event, in one place.",
+    "description": "Slides, code, schedules, mentors and links — all pulled live from this file. Edit data/content.json and the page updates itself.",
+    "date": "TBA",
+    "location": "TBA"
+  },
+  "sections": [
+    {
+      "id": "schedule",
+      "type": "schedule",
+      "title": "Schedule",
+      "items": [
+        { "time": "Day 1 · 10:00", "title": "Opening & Kickoff", "description": "Welcome, ground rules, and team formation." },
+        { "time": "Day 1 · 11:00", "title": "Workshop: Getting Started", "description": "Environment setup and the tools you'll use all weekend." },
+        { "time": "Day 2 · 15:00", "title": "Final Presentations", "description": "Teams demo what they built to judges and mentors." }
+      ]
+    },
+    {
+      "id": "speakers",
+      "type": "speakers",
+      "title": "Speakers & Mentors",
+      "items": [
+        { "name": "Add a speaker", "role": "Role / company", "bio": "Short one-line bio goes here.", "link": "" }
+      ]
+    },
+    {
+      "id": "resources",
+      "type": "resources",
+      "title": "Resources",
+      "items": [
+        { "title": "Slide deck", "description": "Opening keynote slides.", "url": "slides/", "tag": "Slides" },
+        { "title": "Starter code", "description": "Boilerplate to clone before you start building.", "url": "code/", "tag": "Code" }
+      ]
+    },
+    {
+      "id": "links",
+      "type": "links",
+      "title": "Quick Links",
+      "items": [
+        { "label": "Registration form", "url": "#" },
+        { "label": "Discord / chat", "url": "#" }
+      ]
+    }
+  ]
+}
