@@ -3,82 +3,278 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Page not found</title>
-<link rel="stylesheet" href="style.css">
+<title>Page Not Found</title>
+<meta name="robots" content="noindex, follow">
 <style>
-  .nf-card{
-    max-width: 480px;
-    margin: 14vh auto 0;
-    text-align: left;
-  }
-  .nf-card .code{
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--accent-2);
-    font-size: 0.85rem;
-    margin-bottom: 10px;
-  }
-  .nf-card h1{
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.7rem;
-    margin: 0 0 12px;
-  }
-  .nf-card p{ color: var(--text-dim); }
-  .nf-actions{ display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
-  .btn{
-    display: inline-block;
-    text-decoration: none;
-    font-size: 0.92rem;
-    padding: 10px 18px;
-    border-radius: var(--radius-s);
-    border: 1px solid var(--border-strong);
-  }
-  .btn-primary{ background: var(--accent); color: #14181A; border-color: var(--accent); font-weight: 600; }
-  .btn-secondary{ color: var(--text-dim); }
+    /* ============================================================
+       CONFIG — the only things you need to change for your site.
+       ============================================================ */
+    :root {
+        --card-bg: #3d4a5e;
+        --card-radius: 20px;
+        --label-color: #6fa8dc;
+        --input-bg: #eceff1;
+        --btn-color: #3b82f6;
+        --btn-hover: #2f6fd6;
+        --page-bg: #f4f5f7;
+        --text-dark: #2c3e50;
+        --text-dim: #6c757d;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--page-bg);
+        color: var(--text-dark);
+        line-height: 1.6;
+    }
+    .container { max-width: 640px; margin: 0 auto; padding: 0 20px; }
+
+    header {
+        padding: 24px 0;
+        text-align: center;
+    }
+    header a {
+        text-decoration: none;
+        color: var(--text-dark);
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .nf-hero {
+        text-align: center;
+        padding: 40px 20px 30px;
+    }
+    .nf-hero .code {
+        font-size: 4rem;
+        font-weight: 800;
+        color: var(--btn-color);
+        line-height: 1;
+    }
+    .nf-hero h1 { font-size: 1.6rem; margin: 0.6rem 0 0.8rem; color: var(--text-dark); }
+    .nf-hero p { color: var(--text-dim); max-width: 460px; margin: 0 auto 1.6rem; }
+    .nf-hero .btn-home {
+        display: inline-block;
+        padding: 11px 26px;
+        border-radius: 25px;
+        background: var(--btn-color);
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background 0.2s;
+    }
+    .nf-hero .btn-home:hover { background: var(--btn-hover); }
+
+    /* ---------- Contact card (matches the reference design) ---------- */
+    .contact-card {
+        background: var(--card-bg);
+        border-radius: var(--card-radius);
+        padding: 2.4rem 2rem;
+        margin: 20px auto 60px;
+        color: white;
+    }
+    .contact-card h2 {
+        font-size: 1.7rem;
+        font-weight: 700;
+        margin-bottom: 1.6rem;
+    }
+    .contact-card label {
+        display: block;
+        color: var(--label-color);
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+    .form-group { margin-bottom: 1.6rem; }
+    .contact-card input,
+    .contact-card textarea {
+        width: 100%;
+        padding: 14px 16px;
+        border: none;
+        border-radius: 10px;
+        background: var(--input-bg);
+        font-size: 0.98rem;
+        font-family: inherit;
+        color: #333;
+    }
+    .contact-card textarea {
+        min-height: 150px;
+        resize: vertical;
+        line-height: 1.5;
+    }
+    .contact-card input::placeholder,
+    .contact-card textarea::placeholder { color: #7a8288; }
+    .contact-card button {
+        padding: 13px 30px;
+        border: none;
+        border-radius: 10px;
+        background: var(--btn-color);
+        color: white;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .contact-card button:hover { background: var(--btn-hover); }
+    .contact-card .sent-note {
+        margin-top: 1rem;
+        color: #7ee8a8;
+        font-weight: 600;
+        font-size: 0.92rem;
+        display: none;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px 0 40px;
+        color: var(--text-dim);
+        font-size: 0.85rem;
+    }
 </style>
 </head>
 <body>
 
-<!--
-  Paths below are already set for this repo's GitHub Pages project URL:
-  https://<username>.github.io/hackaton_workshop_webaniar/
-  If you ever rename the repo or move to a custom domain, update the
-  "/hackaton_workshop_webaniar/" paths below to match.
--->
-
-<header class="site-header">
-  <div class="wrap">
-    <a href="/hackaton_workshop_webaniar/" class="brand" style="text-decoration:none;"><span class="dot"></span> Event Hub</a>
-  </div>
+<header>
+    <a href="/" id="site-home-link">Back to Home</a>
 </header>
 
-<div class="wrap nf-card">
-  <div class="code">404</div>
-  <h1>This page doesn't exist here</h1>
-  <p>
-    The link that brought you here may be out of date, mistyped, or
-    pointing at something that's since moved. The hub itself is still
-    up — start from the home page below.
-  </p>
-  <div class="nf-actions">
-    <a class="btn btn-primary" href="/hackaton_workshop_webaniar/">Back to the hub</a>
-    <a class="btn btn-secondary" id="contact-link" href="#">Report this link</a>
-  </div>
-</div>
+<section class="nf-hero">
+    <div class="container">
+        <div class="code">404</div>
+        <h1>This page doesn't exist</h1>
+        <p>The link you followed may be outdated, mistyped, or moved. Let us know below and we'll take a look.</p>
+        <a href="/" class="btn-home">Back to Homepage</a>
+    </div>
+</section>
+
+<section class="container">
+    <div class="contact-card">
+        <h2>Send us a Message</h2>
+
+        <div class="form-group">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" placeholder="Your name (optional)">
+        </div>
+
+        <div class="form-group">
+            <label for="cf-phone">Phone</label>
+            <input type="tel" id="cf-phone" placeholder="Your phone (optional)">
+        </div>
+
+        <div class="form-group">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" placeholder="Your email (optional)">
+        </div>
+
+        <div class="form-group">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" placeholder="Describe what happened..."></textarea>
+        </div>
+
+        <button onclick="sendReport()">Send Message</button>
+        <div class="sent-note" id="sentNote">Thanks — your message has been sent.</div>
+    </div>
+</section>
+
+<footer>
+    <p id="footer-text">&copy; 2026 Your Site Name. All rights reserved.</p>
+</footer>
 
 <script>
-  fetch('/hackaton_workshop_webaniar/data/content.json').then(r => r.json()).then(data => {
-    const email = data?.event?.contact_email;
-    const contactLink = document.getElementById('contact-link');
-    if (email) {
-      const subject = encodeURIComponent('Broken link on the event hub');
-      const body = encodeURIComponent(`This URL gave a 404:\n${window.location.href}`);
-      contactLink.href = `mailto:${email}?subject=${subject}&body=${body}`;
-    } else {
-      contactLink.style.display = 'none';
+/* ============================================================
+   CONFIG — edit these four things to use this page on any site.
+   ============================================================ */
+const CONFIG = {
+    siteName: 'Your Site Name',
+    homeUrl: '/',
+    formAction: 'YOUR_GOOGLE_FORM_ACTION_URL_HERE', // e.g. https://docs.google.com/forms/d/e/XXXX/formResponse
+    fields: {
+        name: 'entry.XXXXXXXXXX',
+        phone: 'entry.XXXXXXXXXX',
+        email: 'entry.XXXXXXXXXX',
+        message: 'entry.XXXXXXXXXX'
     }
-  }).catch(() => {
-    document.getElementById('contact-link').style.display = 'none';
-  });
+};
+
+document.getElementById('site-home-link').href = CONFIG.homeUrl;
+document.querySelector('.btn-home').href = CONFIG.homeUrl;
+document.getElementById('footer-text').innerHTML = `&copy; ${new Date().getFullYear()} ${CONFIG.siteName}. All rights reserved.`;
+
+// ---- Auto-captured context, used only to pre-fill the Message box ----
+
+function getReferrerDomain() {
+    if (!document.referrer) return 'Direct / no referrer (typed URL or bookmark)';
+    try { return new URL(document.referrer).hostname.replace(/^www\./, ''); }
+    catch (e) { return document.referrer; }
+}
+
+function getDeviceInfo() {
+    const ua = navigator.userAgent;
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(ua);
+    let os = 'Unknown OS';
+    if (/Windows/i.test(ua)) os = 'Windows';
+    else if (/Mac OS X/i.test(ua)) os = 'macOS';
+    else if (/Android/i.test(ua)) os = 'Android';
+    else if (/iPhone|iPad|iOS/i.test(ua)) os = 'iOS';
+    else if (/Linux/i.test(ua)) os = 'Linux';
+
+    let browser = 'Unknown browser';
+    if (/Edg\//i.test(ua)) browser = 'Edge';
+    else if (/Chrome\//i.test(ua) && !/Chromium/i.test(ua)) browser = 'Chrome';
+    else if (/Safari\//i.test(ua) && !/Chrome/i.test(ua)) browser = 'Safari';
+    else if (/Firefox\//i.test(ua)) browser = 'Firefox';
+
+    return `${isMobile ? 'Mobile' : 'Desktop'} · ${os} · ${browser} · ${screen.width}x${screen.height}`;
+}
+
+// Approximate location from the visitor's public IP — same info any
+// server access log already records. No permission prompt needed.
+// Fails silently (and just skips the line) if the lookup is blocked.
+function getApproxLocation() {
+    return fetch('https://ipapi.co/json/')
+        .then(r => r.json())
+        .then(d => {
+            if (d.error) return null;
+            const parts = [d.city, d.region, d.country_name].filter(Boolean);
+            return parts.length ? parts.join(', ') : null;
+        })
+        .catch(() => null);
+}
+
+// Pre-fill the Message box with the report template — visitor can send
+// as-is, or edit/add to it before hitting Send.
+getApproxLocation().then(location => {
+    const lines = [
+        `Broken link: ${window.location.href}`,
+        `Came from: ${getReferrerDomain()}`,
+        `Device: ${getDeviceInfo()}`
+    ];
+    if (location) lines.push(`Approx. location: ${location}`);
+    lines.push('', '(Feel free to add more details above this line)');
+
+    document.getElementById('cf-message').value = lines.join('\n');
+});
+
+// ---- Submit (uses the same FormData + no-cors pattern as any
+//      standard Google Form-backed contact form) ----
+function sendReport() {
+    if (CONFIG.formAction.includes('YOUR_GOOGLE_FORM')) {
+        alert('Set CONFIG.formAction and CONFIG.fields at the top of this file first.');
+        return;
+    }
+    const formData = new FormData();
+    formData.append(CONFIG.fields.name, document.getElementById('cf-name').value || 'Anonymous (404 report)');
+    formData.append(CONFIG.fields.phone, document.getElementById('cf-phone').value || 'N/A');
+    formData.append(CONFIG.fields.email, document.getElementById('cf-email').value || 'no-reply@' + window.location.hostname);
+    formData.append(CONFIG.fields.message, document.getElementById('cf-message').value);
+
+    fetch(CONFIG.formAction, { method: 'POST', body: formData, mode: 'no-cors' })
+        .then(() => {
+            document.getElementById('sentNote').style.display = 'block';
+        })
+        .catch(() => {
+            alert('Something went wrong sending this. Please try again.');
+        });
+}
 </script>
+
 </body>
 </html>
